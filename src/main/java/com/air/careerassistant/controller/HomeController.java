@@ -20,10 +20,9 @@ public class HomeController {
     public RedirectView showSearches(String title, String location) throws IOException {
         System.out.println("Inside /job searches here with title "+title+" "+location);
         // api call here
-        // AdzunaJobs.getAdzunaJobs(title,location);
+//         AdzunaJobs.getAdzunaJobs(title,location);
         GitHubJobs.getGitHubJobs(title,location);
         // iterate through the json object and then run it through the constructor
-
         return new RedirectView("/");
 }
 }

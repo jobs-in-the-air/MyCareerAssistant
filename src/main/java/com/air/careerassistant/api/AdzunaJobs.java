@@ -18,6 +18,8 @@ public class AdzunaJobs {
                 "https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=d64a4bcb&app_key=6fa84eae583e461dbde5a8416fc2adca");
         connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("Accept", "application/json");
         BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String firstLine = input.readLine();
         StringBuffer entireStringFromResponse = new StringBuffer();
