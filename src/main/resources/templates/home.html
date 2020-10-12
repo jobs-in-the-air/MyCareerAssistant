@@ -7,10 +7,16 @@
 <body>
 <header>
     <nav th:replace="fragments/nav :: nav">
-        
-
     </nav>
 </header>
 <h1> This is Home </h1>
+<main>
+    <form action="/jobsearch" method="POST">
+        <legend>Search for Jobs!! </legend>
+        Job Title: <input type="text" name="title">
+        Location: <input type="text" name="location">
+        <input type="submit" value="Submit">
+    </form>
+</main>
 </body>
 </html>
