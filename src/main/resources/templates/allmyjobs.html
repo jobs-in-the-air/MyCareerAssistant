@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<header>
+    <nav th:replace="fragments/nav :: nav">
+    </nav>
+</header>
+<main>
+    <h1> These are All My Jobs </h1>
+<!--    "userJobList"-->
+    <section th:each="jobs: ${user.getJobList()}">
+        <p th:text="${jobs.getCreatedAt()}"></p>
+        <p th:text="${jobs.title}"></p>
+        <p th:text="${jobs.companyUrl}"></p>
+        <p th:if="${jobs.getJobStatus()}"></p>
+        <p th:text="${jobs.getJobStatus().getStatus()}"></p>
+
+    </section>
+</main>
+</body>
+</html>

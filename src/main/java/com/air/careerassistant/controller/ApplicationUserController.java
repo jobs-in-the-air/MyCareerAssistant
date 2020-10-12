@@ -1,5 +1,6 @@
 package com.air.careerassistant.controller;
 
+import com.air.careerassistant.model.job.Job;
 import com.air.careerassistant.model.user.ApplicationUser;
 import com.air.careerassistant.model.user.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.ArrayList;
 
 @Controller
 public class ApplicationUserController {
@@ -43,10 +45,13 @@ public class ApplicationUserController {
         return new RedirectView ("/");
     }
 
-//    @GetMapping("/allmyjobs")
-//    public String returnAllJobs(Model m, Principal principal){
-//        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-//        m.ad
-//    }
+    @GetMapping("/allmyjobs")
+    public String returnAllJobs(Model m, Principal principal){
+        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+        System.out.println("this is the id :  "+ user.getJobList());
+//        ArrayList<Job> userJobList = (ArrayList<Job>) user.getJobList();
+        m.addAttribute("user", user);
+        return ("allmyjobs");
+    }
 
 }
