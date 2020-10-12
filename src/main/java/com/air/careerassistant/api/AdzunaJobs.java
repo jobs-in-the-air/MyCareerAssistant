@@ -13,9 +13,11 @@ public class AdzunaJobs {
     public static void getAdzunaJobs(String title, String location) throws IOException {
         HttpURLConnection connection;
         String description;
-        String place;
-        URL url = new URL(
-                "https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=d64a4bcb&app_key=6fa84eae583e461dbde5a8416fc2adca");
+        String place = "&where=" + location;
+        String what = "&what=" + title;
+        String stringUrl = "https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=d64a4bcb&app_key=6fa84eae583e461dbde5a8416fc2adca" + place + what;
+
+        URL url = new URL(stringUrl);
         connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/json");
