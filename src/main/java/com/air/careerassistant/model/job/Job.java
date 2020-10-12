@@ -1,7 +1,8 @@
 package com.air.careerassistant.model.job;
 
-import com.air.careerassistant.model.jobTrack.JobStatus;
 
+import com.air.careerassistant.model.jobTrack.JobStatus;
+import com.air.careerassistant.model.user.ApplicationUser;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Calendar;
@@ -20,14 +21,20 @@ public class Job {
     Date createdAt;
     String type;
 
+
     @OneToOne
     @JoinColumn(name="status_id", referencedColumnName = "id")
     public JobStatus jobStatus;
 
+    @ManyToOne
+    ApplicationUser applicationUser;
+
+
     public Job() {
     }
 
-    public Job(String url, String company, String company_url, String title, String location, String description, String type, JobStatus jobStatus) {
+
+    public Job(ApplicationUser applicationUser, String url, String company, String company_url, String title, String location, String description, String type, JobStatus jobStatus) {
         this.url = url;
         this.company = company;
         this.company_url = company_url;
@@ -37,6 +44,8 @@ public class Job {
         this.createdAt = new Date(Calendar.getInstance().getTime().getTime());
         this.type = type;
         this.jobStatus = jobStatus;
+        this.applicationUser = applicationUser;
+
     }
 
     public Date getCreatedAt() {
@@ -69,6 +78,14 @@ public class Job {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public ApplicationUser getApplicationUser() {
+        return applicationUser;
     }
 
     @Override

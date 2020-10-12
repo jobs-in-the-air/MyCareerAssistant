@@ -2,9 +2,12 @@ package com.air.careerassistant.controller;
 
 import com.air.careerassistant.model.job.Job;
 import com.air.careerassistant.model.job.JobRepository;
+
 import com.air.careerassistant.model.jobTrack.JobStatus;
 import com.air.careerassistant.model.jobTrack.JobStatusRepository;
 import com.air.careerassistant.model.user.ApplicationUser;
+import com.air.careerassistant.model.user.ApplicationUserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,12 @@ public class JobController {
     JobRepository jobRepository;
 
     @Autowired
+
     JobStatusRepository jobStatusRepository;
+
+    @Autowired
+    ApplicationUserRepository applicationUserRepository;
+
 
     @GetMapping("/jobdetails")
     public String showDetails() {
@@ -30,6 +38,7 @@ public class JobController {
 
     @PostMapping("/jobsearchresult")
     public RedirectView saveDetails(
+            Principal principal,
             String jobUrl,
             String company,
             String company_url,
@@ -38,15 +47,23 @@ public class JobController {
             String description,
             String type
     ) {
+
         JobStatus newJobStatus = new JobStatus();
         jobStatusRepository.save(newJobStatus);
-        Job newJob = new Job(jobUrl, company, company_url, title, location, description, type, newJobStatus);
+       
+        ApplicationUser currentUser = applicationUserRepository.findByUsername(principal.getName());
+        Job newJob = new Job(currentUser, jobUrl, company, company_url, title, location, description, type, newJobStatus);
         jobRepository.save(newJob);
         return new RedirectView("/jobdetails");
     }
 
     @GetMapping("/jobdetails/{localId}")
-    public String showNewJobDetails(@PathVariable Long localId) {
+
+    public String showNewJobDetails(Model model, Principal principal, @PathVariable Long localId) {
+        Job job = jobRepository.getOne(localId);
+        if (job.getApplicationUser().getUsername().equals(principal.getName())) {
+            model.addAttribute("currentJob", job);
+        }
 
         return "details";
     }
