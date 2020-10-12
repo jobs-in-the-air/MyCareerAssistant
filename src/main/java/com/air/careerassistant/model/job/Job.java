@@ -1,9 +1,8 @@
 package com.air.careerassistant.model.job;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.air.careerassistant.model.jobTrack.JobStatus;
+
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -21,10 +20,14 @@ public class Job {
     Date createdAt;
     String type;
 
+    @OneToOne
+    @JoinColumn(name="status_id", referencedColumnName = "id")
+    public JobStatus jobStatus;
+
     public Job() {
     }
 
-    public Job(String url, String company, String company_url, String title, String location, String description, String type) {
+    public Job(String url, String company, String company_url, String title, String location, String description, String type, JobStatus jobStatus) {
         this.url = url;
         this.company = company;
         this.company_url = company_url;
@@ -33,6 +36,7 @@ public class Job {
         this.description = description;
         this.createdAt = new Date(Calendar.getInstance().getTime().getTime());
         this.type = type;
+        this.jobStatus = jobStatus;
     }
 
     public Date getCreatedAt() {
@@ -72,12 +76,13 @@ public class Job {
         return "Job{" +
                 "localId=" + localId +
                 ", url='" + url + '\'' +
-                ", companyName='" + company + '\'' +
-                ", companyUrl='" + company_url + '\'' +
+                ", company='" + company + '\'' +
+                ", company_url='" + company_url + '\'' +
                 ", title='" + title + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", createdAt=" + createdAt +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

@@ -2,6 +2,8 @@ package com.air.careerassistant.controller;
 
 import com.air.careerassistant.model.job.Job;
 import com.air.careerassistant.model.job.JobRepository;
+import com.air.careerassistant.model.jobTrack.JobStatus;
+import com.air.careerassistant.model.jobTrack.JobStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,9 @@ import org.springframework.web.servlet.view.RedirectView;
 public class JobController {
     @Autowired
     JobRepository jobRepository;
+
+    @Autowired
+    JobStatusRepository jobStatusRepository;
 
     @GetMapping("/jobdetails")
     public String showDetails() {
@@ -29,7 +34,9 @@ public class JobController {
             String description,
             String type
     ) {
-        Job newJob = new Job(jobUrl, company, company_url, title, location, description, type);
+        JobStatus newJobStatus = new JobStatus();
+        jobStatusRepository.save(newJobStatus);
+        Job newJob = new Job(jobUrl, company, company_url, title, location, description, type, newJobStatus);
         jobRepository.save(newJob);
         return new RedirectView("/jobdetails");
     }
