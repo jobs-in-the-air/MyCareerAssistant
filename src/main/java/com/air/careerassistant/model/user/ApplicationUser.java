@@ -1,10 +1,13 @@
 package com.air.careerassistant.model.user;
 
+import com.air.careerassistant.model.job.Job;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -16,6 +19,9 @@ public class ApplicationUser implements UserDetails {
     private String firstname;
     private String lastname;
     private String password;
+
+    @OneToMany(mappedBy = "applicationUser")
+    List<Job> jobList = new ArrayList<>();
 
     public ApplicationUser() {
 
