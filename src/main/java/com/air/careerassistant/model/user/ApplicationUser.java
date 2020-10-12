@@ -1,6 +1,7 @@
 package com.air.careerassistant.model.user;
 
 import com.air.careerassistant.model.job.Job;
+import com.air.careerassistant.model.post.Post;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -23,6 +24,8 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     List<Job> jobList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "postUser")
+    List<Post> postList = new ArrayList<>();
     public ApplicationUser() {
 
     }
