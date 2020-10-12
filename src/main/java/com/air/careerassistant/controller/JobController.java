@@ -63,6 +63,7 @@ public class JobController {
         Job job = jobRepository.getOne(localId);
         if (job.getApplicationUser().getUsername().equals(principal.getName())) {
             model.addAttribute("currentJob", job);
+            model.addAttribute("posts", job.getPostList());
         }
 
         return "details";

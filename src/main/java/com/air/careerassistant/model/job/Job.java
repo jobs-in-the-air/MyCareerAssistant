@@ -1,11 +1,18 @@
 package com.air.careerassistant.model.job;
 
 
+import com.air.careerassistant.model.post.Post;
+import com.air.careerassistant.model.user.ApplicationUser;
+
+
+
 import com.air.careerassistant.model.jobTrack.JobStatus;
 import com.air.careerassistant.model.user.ApplicationUser;
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @Entity
 public class Job {
@@ -29,6 +36,9 @@ public class Job {
     @ManyToOne
     ApplicationUser applicationUser;
 
+
+    @OneToMany(mappedBy = "job")
+    List<Post> postList = new ArrayList<>();
 
     public Job() {
     }
@@ -105,5 +115,9 @@ public class Job {
                 ", createdAt=" + createdAt +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public List<Post> getPostList() {
+        return postList;
     }
 }
