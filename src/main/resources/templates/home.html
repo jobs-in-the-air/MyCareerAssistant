@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -17,6 +17,15 @@
         Location: <input type="text" name="location">
         <input type="submit" value="Submit">
     </form>
+<section th:if="${jobList}">
+    <section th:each="jobInfo : ${jobList}">
+        <p th:text="${jobInfo.getTitle()}"></p>
+        <p th:text="${jobInfo.getLocation()}"></p>
+        <a th:href="${jobInfo.getUrl()}">Apply Here</a>
+    </section>
+    </section>
+
+
 </main>
 </body>
 </html>

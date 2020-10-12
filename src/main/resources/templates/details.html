@@ -13,17 +13,19 @@
     </nav>
 </header>
 <main>
-    <form action="/jobsearchresult" method="POST">
-        <legend>Add a Job</legend>
-        Job Url: <input type="text" name="jobUrl">
-        Company: <input type="text" name="company">
-        Company Url: <input type="text" name="company_url">
-        Job Title: <input type="text" name="title">
-        Location: <input type="text" name="location">
-        Description: <input type="text" name="description">
-        Contract Type: <input type="text" name="type">
-        <input type="submit" value="Submit">
-    </form>
+
+<form action="/jobsearchresult" method="POST">
+    <legend>Add a Job</legend>
+    Job Url: <input type="text" name="url">
+    Company: <input type="text" name="company">
+    Company Url: <input type="text" name="company_url">
+    Job Title: <input type="text" name="title">
+    Location: <input type="text" name="location">
+    Description: <input type="text" name="description">
+    Contract Type: <input type="text" name="type">
+    JobStatus: <input type="text" name="status" value="viewed">
+    <input type="submit" value="Submit">
+</form>
 
     <section th:if="${currentJob}">
         <p>job details</p>
@@ -37,7 +39,7 @@
             <li th:text="${currentJob.getType()}"></li>
         </ul>
     </section>
-    <section th:if="${currentJob}">
+  <section th:if="${currentJob}">
         <form action="/post" method="post">
             <legend>Add Post
             </legend>
@@ -49,4 +51,5 @@
 
 </main>
 </body>
+
 </html>
