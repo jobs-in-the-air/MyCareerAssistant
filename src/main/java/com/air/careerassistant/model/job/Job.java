@@ -1,9 +1,8 @@
 package com.air.careerassistant.model.job;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.air.careerassistant.model.user.ApplicationUser;
+
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -21,10 +20,13 @@ public class Job {
     Date createdAt;
     String type;
 
+    @ManyToOne
+    ApplicationUser applicationUser;
+
     public Job() {
     }
 
-    public Job(String jobUrl, String company, String company_url, String title, String location, String description, String type) {
+    public Job(ApplicationUser applicationUser, String jobUrl, String company, String company_url, String title, String location, String description, String type) {
         this.jobUrl = jobUrl;
         this.company = company;
         this.company_url = company_url;
@@ -33,6 +35,7 @@ public class Job {
         this.description = description;
         this.createdAt = new Date(Calendar.getInstance().getTime().getTime());
         this.type = type;
+        this.applicationUser = applicationUser;
     }
 
     public Date getCreatedAt() {
@@ -65,6 +68,14 @@ public class Job {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public ApplicationUser getApplicationUser() {
+        return applicationUser;
     }
 
     @Override

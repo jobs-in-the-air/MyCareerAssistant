@@ -12,18 +12,32 @@
     <nav th:replace="fragments/nav :: nav">
     </nav>
 </header>
+<main>
+    <form action="/jobsearchresult" method="POST">
+        <legend>Add a Job</legend>
+        Job Url: <input type="text" name="jobUrl">
+        Company: <input type="text" name="company">
+        Company Url: <input type="text" name="company_url">
+        Job Title: <input type="text" name="title">
+        Location: <input type="text" name="location">
+        Description: <input type="text" name="description">
+        Contract Type: <input type="text" name="type">
+        <input type="submit" value="Submit">
+    </form>
 
-<form action="/jobsearchresult" method="POST">
-    <legend>Add a Job</legend>
-    Job Url: <input type="text" name="jobUrl">
-    Company: <input type="text" name="company">
-    Company Url: <input type="text" name="company_url">
-    Job Title: <input type="text" name="title">
-    Location: <input type="text" name="location">
-    Description: <input type="text" name="description">
-    Contract Type: <input type="text" name="type">
-    <input type="submit" value="Submit">
-</form>
+    <section th:if="${currentJob}">
+        <p>job details</p>
+        <ul>
+            <li th:text="${currentJob.getTitle()}"></li>
+            <li th:text="${currentJob.getCompanyName()}"></li>
+            <li th:text="${currentJob.getCompanyUrl()}"></li>
+            <li th:text="${currentJob.getJobUrl()}"></li>
+            <li th:text="${currentJob.getLocation()}"></li>
+            <li th:text="${currentJob.getDescription()}"></li>
+            <li th:text="${currentJob.getType()}"></li>
+        </ul>
+    </section>
 
+</main>
 </body>
 </html>
