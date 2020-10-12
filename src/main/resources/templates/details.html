@@ -37,6 +37,15 @@
             <li th:text="${currentJob.getType()}"></li>
         </ul>
     </section>
+    <section th:if="${currentJob}">
+        <form action="/post" method="post">
+            <legend>Add Post
+            </legend>
+            <input type="text" name="body">
+            <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
+            <input type="submit" value="Submit">
+        </form>
+    </section>
 
 </main>
 </body>
