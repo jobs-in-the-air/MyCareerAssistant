@@ -12,7 +12,7 @@ public class Job {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long localId;
-    String jobUrl; //required
+    String url; //required
     String company; //required
     String company_url = null;
     String title; //required
@@ -24,8 +24,8 @@ public class Job {
     public Job() {
     }
 
-    public Job(String jobUrl, String company, String company_url, String title, String location, String description, String type) {
-        this.jobUrl = jobUrl;
+    public Job(String url, String company, String company_url, String title, String location, String description, String type) {
+        this.url = url;
         this.company = company;
         this.company_url = company_url;
         this.title = title;
@@ -43,8 +43,8 @@ public class Job {
         return localId;
     }
 
-    public String getJobUrl() {
-        return jobUrl;
+    public String getUrl() {
+        return url;
     }
 
     public String getCompanyName() {
@@ -71,7 +71,7 @@ public class Job {
     public String toString() {
         return "Job{" +
                 "localId=" + localId +
-                ", jobUrl='" + jobUrl + '\'' +
+                ", url='" + url + '\'' +
                 ", companyName='" + company + '\'' +
                 ", companyUrl='" + company_url + '\'' +
                 ", title='" + title + '\'' +

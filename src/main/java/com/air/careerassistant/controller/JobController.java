@@ -36,6 +36,7 @@ public class JobController {
 
     @GetMapping("/jobdetails/{localId}")
     public String showNewJobDetails(@PathVariable Long localId) {
-        
+
+        return "details";
     }
 }

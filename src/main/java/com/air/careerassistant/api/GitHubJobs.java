@@ -17,7 +17,7 @@ public class GitHubJobs {
     //1. location and title from the front end
     //2. Make the api call here
     //3. return a gson object
-    public static void getGitHubJobs(String title, String location) throws IOException {
+    public static ArrayList<Job> getGitHubJobs(String title, String location) throws IOException {
         HttpURLConnection connection;
         String description = "description="+title;
         String place = "&location="+location;
@@ -34,16 +34,14 @@ public class GitHubJobs {
             firstLine = input.readLine();
         }
         input.close();
-        System.out.println("this is the entire string from response  "+entireStringFromResponse);
-        getGsonObject(entireStringFromResponse);
-
+        return getGsonObject(entireStringFromResponse);
     }
 
-    private static void getGsonObject(StringBuffer response){
+    private static ArrayList<Job> getGsonObject(StringBuffer response){
         Gson gson = new Gson();
         ArrayList<Job> jobListFromApi = new ArrayList<>();
         jobListFromApi = gson.fromJson(response.toString(), new TypeToken<ArrayList<Job>>(){}.getType());
-        System.out.println("jobs list here  "+jobListFromApi);
+        return jobListFromApi;
     }
 
 }
