@@ -14,7 +14,7 @@ public class Job {
     Long localId;
     String url; //required
     String company; //required
-    String company_url = null;
+    public String companyUrl = null;
     String title; //required
     String location; //required
     String description = null;
@@ -37,7 +37,7 @@ public class Job {
     public Job(ApplicationUser applicationUser, String url, String company, String company_url, String title, String location, String description, String type, JobStatus jobStatus) {
         this.url = url;
         this.company = company;
-        this.company_url = company_url;
+        this.companyUrl = company_url;
         this.title = title;
         this.location = location;
         this.description = description;
@@ -46,6 +46,10 @@ public class Job {
         this.jobStatus = jobStatus;
         this.applicationUser = applicationUser;
 
+    }
+
+    public JobStatus getJobStatus() {
+        return jobStatus;
     }
 
     public Date getCreatedAt() {
@@ -65,7 +69,7 @@ public class Job {
     }
 
     public String getCompanyUrl() {
-        return company_url;
+        return companyUrl;
     }
 
     public String getTitle() {
@@ -94,7 +98,7 @@ public class Job {
                 "localId=" + localId +
                 ", url='" + url + '\'' +
                 ", company='" + company + '\'' +
-                ", company_url='" + company_url + '\'' +
+                ", company_url='" + companyUrl + '\'' +
                 ", title='" + title + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +

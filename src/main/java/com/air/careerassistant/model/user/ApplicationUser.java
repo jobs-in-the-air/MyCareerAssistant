@@ -24,7 +24,6 @@ public class ApplicationUser implements UserDetails {
     List<Job> jobList = new ArrayList<>();
 
     public ApplicationUser() {
-
     }
 
     public ApplicationUser(String username, String firstname, String lastname, String password) {
@@ -32,6 +31,10 @@ public class ApplicationUser implements UserDetails {
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
+    }
+
+    public List<Job> getJobList() {
+        return jobList;
     }
 
     public long getId() {
