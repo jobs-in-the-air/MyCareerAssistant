@@ -40,9 +40,6 @@ public class Job {
     @OneToMany(mappedBy = "job")
     List<Post> postList = new ArrayList<>();
 
-
-
-
     public Job() {
     }
 
@@ -114,5 +111,9 @@ public class Job {
                 ", createdAt=" + createdAt +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public List<Post> getPostList() {
+        return postList;
     }
 }

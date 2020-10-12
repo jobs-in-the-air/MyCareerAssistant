@@ -31,7 +31,25 @@ public class Post {
 
     public Post(){}
 
+    public Long getId() {
+        return id;
+    }
 
+    public Job getJob() {
+        return job;
+    }
+
+    public ApplicationUser getPostUser() {
+        return postUser;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 }
 
 
