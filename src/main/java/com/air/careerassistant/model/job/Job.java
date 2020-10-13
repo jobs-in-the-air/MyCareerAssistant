@@ -1,6 +1,7 @@
 package com.air.careerassistant.model.job;
 
 
+import com.air.careerassistant.model.contact.Contact;
 import com.air.careerassistant.model.post.Post;
 import com.air.careerassistant.model.user.ApplicationUser;
 
@@ -10,9 +11,7 @@ import com.air.careerassistant.model.jobTrack.JobStatus;
 import com.air.careerassistant.model.user.ApplicationUser;
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Job {
@@ -39,6 +38,13 @@ public class Job {
   
     List<Post> postList = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "joinContacts",
+        joinColumns = @JoinColumn(name="relatedJobs"),
+        inverseJoinColumns = @JoinColumn(name="relatedContacts")
+    )
+    Set<Contact> relatedContacts = new HashSet<>();
     public Job() {
     }
 
@@ -139,4 +145,5 @@ public class Job {
     public List<Post> getPostList() {
         return postList;
     }
+
 }
