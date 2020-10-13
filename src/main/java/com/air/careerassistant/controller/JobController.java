@@ -69,5 +69,10 @@ public class JobController {
         return "details";
     }
 
+    @PostMapping("/saveJobFromApi")
 
+    public RedirectView saveJobFromApi(int jobInfo, Model m){
+        System.out.println("this is job info after saving" + jobInfo);
+        return new RedirectView("/allmyjobs");
+    }
 }

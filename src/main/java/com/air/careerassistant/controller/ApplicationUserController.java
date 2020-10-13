@@ -48,8 +48,6 @@ public class ApplicationUserController {
     @GetMapping("/allmyjobs")
     public String returnAllJobs(Model m, Principal principal){
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-        System.out.println("this is the id :  "+ user.getJobList());
-//        ArrayList<Job> userJobList = (ArrayList<Job>) user.getJobList();
         m.addAttribute("user", user);
         return ("allmyjobs");
     }
