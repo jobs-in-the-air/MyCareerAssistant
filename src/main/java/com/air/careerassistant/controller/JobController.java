@@ -24,7 +24,6 @@ public class JobController {
     JobRepository jobRepository;
 
     @Autowired
-
     JobStatusRepository jobStatusRepository;
 
     @Autowired
@@ -69,10 +68,12 @@ public class JobController {
         return "details";
     }
 
-    @PostMapping("/saveJobFromApi")
-
-    public RedirectView saveJobFromApi(int jobInfo, Model m){
-        System.out.println("this is job info after saving" + jobInfo);
-        return new RedirectView("/allmyjobs");
-    }
+//    @PostMapping("/saveJobFromApi")
+//
+//    public RedirectView saveJobFromApi(int jobIndex, Model m){
+//        System.out.println("this is job info after saving" + jobIndex);
+//        //System.out.println("list of gitHub jobs " + listOfGitHubJobs.get(jobIndex));
+//        //jobRepository.save(listOfGitHubJobs.get(jobIndex));
+//        return new RedirectView("/allmyjobs");
+//    }
 }

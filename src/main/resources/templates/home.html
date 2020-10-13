@@ -36,7 +36,7 @@
                 </div>
             </form>
             <form action="/saveJobFromApi" method="POST">
-                <input type="hidden" th:value="${jobList.indexOf(jobInfo)}" name="jobInfo">
+                <input type="hidden" th:value="${jobList.indexOf(jobInfo)}" name="jobIndex">
             <input type="submit" value="Save Job">
             </form>
         </section>

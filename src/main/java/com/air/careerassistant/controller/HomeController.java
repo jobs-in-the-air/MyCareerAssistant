@@ -3,9 +3,11 @@ package com.air.careerassistant.controller;
 import com.air.careerassistant.api.AdzunaJobs;
 import com.air.careerassistant.api.GitHubJobs;
 import com.air.careerassistant.model.job.Job;
+import com.air.careerassistant.model.job.JobRepository;
 import com.air.careerassistant.model.jobTrack.JobStatus;
 import com.air.careerassistant.model.user.ApplicationUser;
 import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,9 @@ import java.util.ArrayList;
 public class HomeController {
     private ArrayList<Job> listOfGitHubJobs = new ArrayList<>();
     private Boolean viewdetail=false;
+
+    @Autowired
+    JobRepository jobRepository;
 
     @GetMapping("/")
     public String showhome(Model m){
@@ -53,7 +58,14 @@ public class HomeController {
         return new RedirectView("/");
     }
 
+    @PostMapping("/saveJobFromApi")
 
+    public RedirectView saveJobFromApi(int jobIndex, Model m){
+        System.out.println("this is job info after saving" + jobIndex);
+        System.out.println("list of gitHub jobs " + listOfGitHubJobs.get(jobIndex));
+        //jobRepository.save(listOfGitHubJobs.get(jobIndex));
+        return new RedirectView("/allmyjobs");
+    }
 
 }
 
