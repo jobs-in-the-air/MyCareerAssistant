@@ -36,4 +36,11 @@ public class PostController {
         postRepository.deleteById(postId);
         return new RedirectView("/jobdetails/" + post.getJob().getId());
     }
+    @PostMapping("/update/post")
+    public RedirectView updatePost(Long postId, String body, Principal principal){
+        Post post = postRepository.getOne(postId);
+        post.setBody(body);
+        postRepository.save(post);
+        return new RedirectView("/jobdetails/" + post.getJob().getId());
+    }
 }

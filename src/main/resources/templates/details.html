@@ -54,11 +54,16 @@
             <input type="submit" value="Submit">
         </form>
       <div th:each="post : ${posts}">
-          <p th:text="${post.getPostUser().getUsername()}"></p>
+          <p th:text="${post.getPostUser().getUsername()} + ' on ' + ${post.getCreatedAt()}"></p>
           <p th:text="${post.getBody()}"></p>
           <form action="/delete/post" method="post">
               <input type="hidden" name="postId" th:value="${post.getId()}">
               <input type="submit" value="Delete Post">
+          </form>
+          <form action="/update/post" method="post">
+              <input type="hidden" name="postId" th:value="${post.getId()}">
+              <input type="text" name="body" th:value="${post.getBody()}">
+              <input type="submit" value="Update Post">
           </form>
       </div>
     </section>
