@@ -16,11 +16,12 @@ import java.util.ArrayList;
 @Controller
 public class HomeController {
     private ArrayList<Job> listOfGitHubJobs = new ArrayList<>();
+    private Boolean viewdetail=false;
 
     @GetMapping("/")
     public String showhome(Model m){
         m.addAttribute("jobList", listOfGitHubJobs);
-
+        m.addAttribute("viewdetail", viewdetail);
     return "home";
 }
 
@@ -30,10 +31,22 @@ public class HomeController {
         // api call here
         //AdzunaJobs.getAdzunaJobs(title,location);
         listOfGitHubJobs = GitHubJobs.getGitHubJobs(title,location);
-    System.out.println("This is list of GitHub jobs" + listOfGitHubJobs);
         // iterate through the json object and then run it through the constructor
         return new RedirectView("/");
 }
+
+    @PostMapping("/jobdetail")
+    public RedirectView viewJob(Model m, String choice){
+        if(choice.equals("view")){
+            viewdetail = true;
+        } else {
+            viewdetail = false;
+        }
+        m.addAttribute("jobList", listOfGitHubJobs);
+        m.addAttribute("viewdetail", viewdetail);
+        return new RedirectView("/");
+    }
+
 
 
 }

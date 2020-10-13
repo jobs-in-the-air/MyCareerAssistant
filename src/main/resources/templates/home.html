@@ -17,13 +17,25 @@
         Location: <input type="text" name="location">
         <input type="submit" value="Submit">
     </form>
+    <form action="/jobdetail" method="POST">
 <section th:if="${jobList}">
-    <section th:each="jobInfo : ${jobList}">
-        <p th:text="${jobInfo.getTitle()}"></p>
-        <p th:text="${jobInfo.getLocation()}"></p>
-        <a th:href="${jobInfo.getUrl()}">Apply Here</a>
-    </section>
-    </section>
+        <section th:each="jobInfo : ${jobList}">
+         <p th:text="${jobInfo.getTitle()}"></p>
+         <p th:text="${jobInfo.getLocation()}"></p>
+            <a th:href="${jobInfo.getUrl()}">Apply Here</a>
+            <p th:if="${viewdetail}" th:text="${jobInfo.getDescription()}">
+            </p>
+                <div th:switch="${viewdetail}">
+                    <span th:case="true">
+                <input type="submit" value="hide" name="choice">
+                    </span>
+                    <span th:case="false">
+                <input type="submit" value="view" name="choice">
+                    </span>
+                </div>
+        </section>
+</section>
+  </form>
 
 
 </main>
