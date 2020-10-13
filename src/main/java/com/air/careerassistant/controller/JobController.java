@@ -39,7 +39,7 @@ public class JobController {
     @PostMapping("/jobsearchresult")
     public RedirectView saveDetails(
             Principal principal,
-            String jobUrl,
+            String url,
             String company,
             String company_url,
             String title,
@@ -52,7 +52,7 @@ public class JobController {
         jobStatusRepository.save(newJobStatus);
        
         ApplicationUser currentUser = applicationUserRepository.findByUsername(principal.getName());
-        Job newJob = new Job(currentUser, jobUrl, company, company_url, title, location, description, type, newJobStatus);
+        Job newJob = new Job(currentUser, url, company, company_url, title, location, description, type, newJobStatus);
         jobRepository.save(newJob);
         return new RedirectView("/jobdetails");
     }

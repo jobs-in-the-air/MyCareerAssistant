@@ -1,7 +1,6 @@
 package com.air.careerassistant.model.post;
 
 import com.air.careerassistant.model.job.Job;
-import sun.jvm.hotspot.gc.shared.Generation;
 
 import javax.persistence.*;
 
