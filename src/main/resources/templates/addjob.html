@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<header>
+    <nav th:replace="fragments/nav :: nav">
+    </nav>
+</header>
+<main>
+    <form action="/jobsearchresult" method="POST">
+        <legend>Add a Job</legend>
+        Job Url: <input type="text" name="url">
+        Company: <input type="text" name="company">
+        Company Url: <input type="text" name="company_url">
+        Job Title: <input type="text" name="title">
+        Location: <input type="text" name="location">
+        Description: <input type="text" name="description">
+        Contract Type: <input type="text" name="type">
+        JobStatus: <input type="text" name="status" value="viewed">
+        <input type="submit" value="Submit">
+    </form>
+</main>
+</body>
+</html>
