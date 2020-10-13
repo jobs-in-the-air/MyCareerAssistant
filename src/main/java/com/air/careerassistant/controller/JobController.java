@@ -25,7 +25,6 @@ public class JobController {
     JobRepository jobRepository;
 
     @Autowired
-
     JobStatusRepository jobStatusRepository;
 
     @Autowired
@@ -69,6 +68,7 @@ public class JobController {
         return "details";
     }
 
+
     @PostMapping("/delete/job")
     public RedirectView deleteJob(Long jobId, Principal principal, String name) {
         if (name.equals(principal.getName())) {
@@ -78,4 +78,5 @@ public class JobController {
         Job job = jobRepository.getOne(jobId);
         return new RedirectView("/jobdetails/" + jobId);
     }
+
 }
