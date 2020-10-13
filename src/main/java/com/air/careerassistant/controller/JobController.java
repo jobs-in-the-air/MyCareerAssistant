@@ -31,9 +31,9 @@ public class JobController {
     ApplicationUserRepository applicationUserRepository;
 
 
-    @GetMapping("/jobdetails")
+    @GetMapping("/addjob")
     public String showDetails() {
-        return "details";
+        return "addjob";
     }
 
     @PostMapping("/jobsearchresult")
@@ -54,7 +54,7 @@ public class JobController {
         ApplicationUser currentUser = applicationUserRepository.findByUsername(principal.getName());
         Job newJob = new Job(currentUser, url, company, company_url, title, location, description, type, newJobStatus);
         jobRepository.save(newJob);
-        return new RedirectView("/jobdetails");
+        return new RedirectView("/allmyjobs");
     }
 
     @GetMapping("/jobdetails/{localId}")

@@ -14,18 +14,7 @@
 </header>
 <main>
 
-<form action="/jobsearchresult" method="POST">
-    <legend>Add a Job</legend>
-    Job Url: <input type="text" name="url">
-    Company: <input type="text" name="company">
-    Company Url: <input type="text" name="company_url">
-    Job Title: <input type="text" name="title">
-    Location: <input type="text" name="location">
-    Description: <input type="text" name="description">
-    Contract Type: <input type="text" name="type">
-    JobStatus: <input type="text" name="status" value="viewed">
-    <input type="submit" value="Submit">
-</form>
+
 
     <section th:if="${currentJob}">
         <p th:text="'Job Status: ' + ${currentJob.getJobStatus().getStatus()}"></p>
