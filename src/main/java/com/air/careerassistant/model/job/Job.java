@@ -37,7 +37,7 @@ public class Job {
     ApplicationUser applicationUser;
 
 
-    @OneToMany(mappedBy = "job")
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     List<Post> postList = new ArrayList<>();
 
     public Job() {
