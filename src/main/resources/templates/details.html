@@ -14,8 +14,6 @@
 </header>
 <main>
 
-
-
     <section th:if="${currentJob}">
         <p th:text="'Job Status: ' + ${currentJob.getJobStatus().getStatus()}"></p>
         <form action="/status" method="post">
@@ -46,7 +44,8 @@
             <li th:text="${currentJob.getType()}"></li>
         </ul>
     </section>
-  <section th:if="${currentJob}">
+
+    <section th:if="${currentJob}">
         <form action="/post" method="post">
             <legend>Add Post
             </legend>
@@ -60,9 +59,17 @@
           <form action="/delete/post" method="post">
               <input type="hidden" name="postId" th:value="${post.getId()}">
               <input type="submit" value="Delete Post">
-
           </form>
       </div>
+    </section>
+
+    <section>
+        <p>WARNING - Deleting a job listing is permanent!</p>
+        <form action="/delete/job" method="post">
+            <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
+            Input username: <input type="text" name="name">
+            <input type="submit" value="Delete Job">
+        </form>
     </section>
 
 

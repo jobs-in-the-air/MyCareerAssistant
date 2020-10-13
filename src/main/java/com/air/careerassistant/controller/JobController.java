@@ -5,6 +5,7 @@ import com.air.careerassistant.model.job.JobRepository;
 
 import com.air.careerassistant.model.jobTrack.JobStatus;
 import com.air.careerassistant.model.jobTrack.JobStatusRepository;
+import com.air.careerassistant.model.post.Post;
 import com.air.careerassistant.model.user.ApplicationUser;
 import com.air.careerassistant.model.user.ApplicationUserRepository;
 
@@ -58,7 +59,6 @@ public class JobController {
     }
 
     @GetMapping("/jobdetails/{localId}")
-
     public String showNewJobDetails(Model model, Principal principal, @PathVariable Long localId) {
         Job job = jobRepository.getOne(localId);
         if (job.getApplicationUser().getUsername().equals(principal.getName())) {
@@ -69,5 +69,13 @@ public class JobController {
         return "details";
     }
 
-
+    @PostMapping("/delete/job")
+    public RedirectView deleteJob(Long jobId, Principal principal, String name) {
+        if (name.equals(principal.getName())) {
+            jobRepository.deleteById(jobId);
+            return new RedirectView("/allmyjobs");
+        }
+        Job job = jobRepository.getOne(jobId);
+        return new RedirectView("/jobdetails/" + jobId);
+    }
 }
