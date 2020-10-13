@@ -26,23 +26,20 @@ public class Job {
     String location; //required
     String description = null;
     Date createdAt;
-    String type;
+    String type =null;
 
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="status_id", referencedColumnName = "id")
     public JobStatus jobStatus;
 
     @ManyToOne
     ApplicationUser applicationUser;
 
-
     @OneToMany(mappedBy = "job")
     List<Post> postList = new ArrayList<>();
 
     public Job() {
     }
-
 
     public Job(ApplicationUser applicationUser, String url, String company, String company_url, String title, String location, String description, String type, JobStatus jobStatus) {
         this.url = url;
@@ -57,6 +54,7 @@ public class Job {
         this.applicationUser = applicationUser;
 
     }
+
 
     public JobStatus getJobStatus() {
         return jobStatus;
@@ -100,6 +98,26 @@ public class Job {
 
     public ApplicationUser getApplicationUser() {
         return applicationUser;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setJobStatus(JobStatus jobStatus) {
+        this.jobStatus = jobStatus;
+    }
+
+    public void setApplicationUser(ApplicationUser applicationUser) {
+        this.applicationUser = applicationUser;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
