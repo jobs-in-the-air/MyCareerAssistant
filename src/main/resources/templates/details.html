@@ -28,6 +28,24 @@
 </form>
 
     <section th:if="${currentJob}">
+        <p th:text="'Job Status: ' + ${currentJob.getJobStatus().getStatus()}"></p>
+        <form action="/status" method="post">
+            <legend>Update Job Status</legend>
+            <select name="status">
+                <option value="viewed">viewed</option>
+                <option value="applied">applied</option>
+                <option value="contacted">contacted</option>
+                <option value="interview">interview</option>
+                <option value="offer">offer</option>
+                <option value="accepted">accepted</option>
+                <option value="rejected">rejected</option>
+            </select>
+            <input type="hidden" name="jobStatusId" th:value="${currentJob.getJobStatus().getId()}">
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    <section th:if="${currentJob}">
         <p>job details</p>
         <ul>
             <li th:text="${currentJob.getTitle()}"></li>

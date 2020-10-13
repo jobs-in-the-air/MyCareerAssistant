@@ -24,8 +24,20 @@ public class JobStatus {
         this.status = status;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
