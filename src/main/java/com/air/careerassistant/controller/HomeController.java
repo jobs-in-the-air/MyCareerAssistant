@@ -45,7 +45,7 @@ public class HomeController {
         return "home";
 }
 
-@PostMapping("/jobsearch")
+    @PostMapping("/jobsearch")
     public RedirectView showSearches(String title, String location, Model m) throws IOException {
         System.out.println("Inside /job searches here with title "+title+" "+location);
         // api call here
