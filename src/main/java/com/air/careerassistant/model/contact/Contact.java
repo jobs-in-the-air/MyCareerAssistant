@@ -60,4 +60,8 @@ public class Contact {
     public void addJob(Job job){
         relatedJobs.add(job);
     }
+
+    public void removeJob(Job job) {
+        relatedJobs.remove(job);
+    }
 }

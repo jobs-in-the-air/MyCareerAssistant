@@ -46,5 +46,14 @@ public class ContactController {
      jobRepository.save(job);
      return new RedirectView("/jobdetails/" + jobId);
  }
-
+    @PostMapping("/remove/contact")
+    public RedirectView removecontacts(Principal principal, Long jobId, Long contactId) {
+        Contact contact = contactRepository.getOne(contactId);
+        Job job = jobRepository.getOne(jobId);
+        contact.removeJob(job);
+        job.removeContact(contact);
+        contactRepository.save(contact);
+        jobRepository.save(job);
+        return new RedirectView("/jobdetails/" + jobId);
+    }
 }

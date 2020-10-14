@@ -75,6 +75,10 @@ public class Job {
         return localId;
     }
 
+    public Set<Contact> getRelatedContacts() {
+        return relatedContacts;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -148,5 +152,9 @@ public class Job {
 
     public void addContact(Contact contact) {
         relatedContacts.add(contact);
+    }
+
+    public void removeContact(Contact contact) {
+        relatedContacts.remove(contact);
     }
 }

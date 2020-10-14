@@ -45,10 +45,11 @@
         </ul>
     </section>
     <section>
-        <div th:each="contact : ${contacts}">
-            <p th:text="${contact.getName()} + ' at ' + ${contact.getLinkedin()}"></p>
+        <div th:each="contact : ${currentJob.getRelatedContacts()}">
+            <p th:text="${contact.getName()} + ' at ' + ${contact.getLinkedinUrl()}"></p>
            <form action="/remove/contact" method="post">
                 <input type="hidden" name="contactId" th:value="${contact.getId()}">
+               <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
                 <input type="submit" value="Remove Contact">
             </form>
             </div>
@@ -56,7 +57,7 @@
             <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
             <input type="submit" value="Add Contacts">
             <select name="contactId">
-                <option th:each="contact : ${user.getContactList()}" th:value="${contact.getId()}">
+                <option th:each="contact : ${user.getContactList()}" th:value="${contact.getId()}" th:text="${contact.getName()}">
 
                 </option>
             </select>
