@@ -8,12 +8,16 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <header>
     <nav th:replace="fragments/nav :: nav">
     </nav>
 
 </header>
+<br>
+<br>
+<br>
+<br>
 <main>
     <form action="/jobsearch" method="POST">
         <div class="container">
@@ -23,40 +27,41 @@
                     Job Title: <input type="text" name="title"> </div>
                 <div class="col-4">
                     Location: <input type="text" name="location"> </div>
-            </div>
-            <div class="row justify-content-md-center">
-            <input class="col-6 col-md-4" type="submit" value="Submit">
+                <div class="col-4">
+                    <input class="col-6 col-md-4" type="submit" value="Submit"></div>
+
             </div>
         </div>
     </form>
-
-
-    <section th:if="${jobList}" class="container">
-        <section th:each="jobInfo : ${jobList}" >
+    <br>
+    <br>
+    <section th:if="${jobList}" class="container mx-auto" style="width: 600px;" >
+        <section th:each="jobInfo : ${jobList}" class="p-3 mb-2 bg-light text-dark" >
             <form action="/jobdetail" method="POST">
-                <div class="row justify-content-md-center">
-         <p th:text="${jobInfo.getTitle()}" class="col-6 col-md-4"></p> </div>
+         <h3 th:text="${jobInfo.getTitle()}"></h3>
          <p th:text="${jobInfo.getLocation()}"></p>
             <a th:href="${jobInfo.getUrl()}">Apply Here</a>
-                <p th:text="'this is if it is empty ' + ${viewJobObject.isEmpty()}"></p>
-                <p th:text="'this is the value of the job '+${viewJobObject.get(jobList.indexOf(jobInfo))}"></p>
                 <input type="hidden" th:value="${jobList.indexOf(jobInfo)}" name="jobIndex">
                 <p th:if="${viewJobObject.get(jobList.indexOf(jobInfo))}" th:text="${jobInfo.getDescription()}">
                 </p>
+                <span  class="justify-content-md-left">
                 <div th:switch="${viewJobObject.get(jobList.indexOf(jobInfo))}">
                     <span th:case="true">
-                <input type="submit" value="hide" name="choice">
+                <input type="submit" value="hide" name="choice" class=".col-sm-">
                     </span>
                     <span th:case="false">
-                <input type="submit" value="view" name="choice">
+                <input type="submit" value="view" name="choice" class=".col-sm-">
                     </span>
                 </div>
             </form>
             <form action="/saveJobFromApi" method="POST">
                 <input type="hidden" th:value="${jobList.indexOf(jobInfo)}" name="jobIndex">
-            <input type="submit" value="Save Job">
+                <input type="submit" value="Save Job" class=".col-sm-">
             </form>
+            </span>
         </section>
+        <br>
+        <br>
 </section>
 
 </main>

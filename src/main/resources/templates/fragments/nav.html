@@ -1,7 +1,13 @@
 <nav xmlns:th="http://www.w3.org/1999/xhtml" class="navbar fixed-top navbar-light bg-light" style="background-color: #e3f2fd;">
+    <br>
+    <br>
+    <br>
     <div class="nav-brand"><a href="/">Search Jobs</a></div>
     <div  class = "nav-brand" th:if="${principal}"><a href="/addjob">Add Job</a></div>
     <div class = "nav-brand"  th:if="${principal}"><a href="/logout">Logout</a></div>
     <div  class = "nav-brand" th:unless="${principal}"><a href="/login">Login</a></div>
     <div class = "nav-brand" th:unless="${principal}"><a href="/signup">Signup</a></div>
+    <br>
+    <br>
+    <br>
 </nav>
