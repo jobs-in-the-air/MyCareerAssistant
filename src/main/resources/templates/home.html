@@ -31,10 +31,11 @@
     </form>
 
 
-    <section th:if="${jobList}">
-        <section th:each="jobInfo : ${jobList}">
+    <section th:if="${jobList}" class="container">
+        <section th:each="jobInfo : ${jobList}" >
             <form action="/jobdetail" method="POST">
-         <p th:text="${jobInfo.getTitle()}"></p>
+                <div class="row justify-content-md-center">
+         <p th:text="${jobInfo.getTitle()}" class="col-6 col-md-4"></p> </div>
          <p th:text="${jobInfo.getLocation()}"></p>
             <a th:href="${jobInfo.getUrl()}">Apply Here</a>
                 <p th:text="'this is if it is empty ' + ${viewJobObject.isEmpty()}"></p>
