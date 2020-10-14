@@ -25,7 +25,6 @@ import java.util.HashMap;
 @Controller
 public class HomeController {
     private ArrayList<Job> listOfGitHubJobs = new ArrayList<>();
-//    private Boolean viewdetail=false;
     private HashMap<Integer, Boolean> viewJobObject;
     private Integer jobILike = -1;
 
@@ -57,31 +56,24 @@ public class HomeController {
         for (Integer i=0; i< listOfGitHubJobs.size(); i++){
             viewJobObject.put(i, false);
         }
-        System.out.println("here is the object you are looking for here in /jobsearch  " + viewJobObject.toString());
-
-        // iterate through the json object and then run it through the constructor
         return new RedirectView("/");
 }
 
     @PostMapping("/jobdetail")
     public RedirectView viewJob(String choice, Integer jobIndex){
         jobILike = jobIndex;
-        System.out.println("jobIlike "+jobILike);
         if(choice.equals("view")){
             viewJobObject.replace(jobILike,true);
         } else {
             viewJobObject.replace(jobILike,false);
         }
         if (viewJobObject.size()>0){
-            System.out.println("here is the object you are looking for here in /jobdetail  " + viewJobObject.toString());
         }
         return new RedirectView("/");
     }
 
     @PostMapping("/saveJobFromApi")
     public RedirectView saveJobFromApi(int jobIndex, Model m, Principal principal){
-        System.out.println("this is job info after saving" + jobIndex);
-        System.out.println("list of gitHub jobs " + listOfGitHubJobs.get(jobIndex).getClass());
         Job newJobFromGitHub = listOfGitHubJobs.get(jobIndex);
         ApplicationUser currentUser = applicationUserRepository.findByUsername(principal.getName());
         JobStatus newJobStatus = new JobStatus();
