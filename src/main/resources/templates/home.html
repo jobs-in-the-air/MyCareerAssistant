@@ -12,14 +12,22 @@
 <header>
     <nav th:replace="fragments/nav :: nav">
     </nav>
+
 </header>
-<h1> This is Home </h1>
 <main>
     <form action="/jobsearch" method="POST">
-        <legend>Search for Jobs!! </legend>
-        Job Title: <input type="text" name="title">
-        Location: <input type="text" name="location">
-        <input type="submit" value="Submit">
+        <div class="container">
+        <legend class="row justify-content-md-center"><h1 class="col-6 col-md-4">Search for Jobs</h1> </legend>
+            <div class="row justify-content-md-center">
+                <div class="col-4">
+                    Job Title: <input type="text" name="title"> </div>
+                <div class="col-4">
+                    Location: <input type="text" name="location"> </div>
+            </div>
+            <div class="row justify-content-md-center">
+            <input class="col-6 col-md-4" type="submit" value="Submit">
+            </div>
+        </div>
     </form>
 
 
