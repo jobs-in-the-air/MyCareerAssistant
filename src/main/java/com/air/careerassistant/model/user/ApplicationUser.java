@@ -28,6 +28,10 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "contactUser")
     List<Contact> contactList = new ArrayList<>();
 
+    public List<Contact> getContactList() {
+        return contactList;
+    }
+
     @OneToMany(mappedBy = "postUser")
     List<Post> postList = new ArrayList<>();
     public ApplicationUser() {
