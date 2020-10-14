@@ -20,11 +20,14 @@ import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 @Controller
 public class HomeController {
     private ArrayList<Job> listOfGitHubJobs = new ArrayList<>();
-    private Boolean viewdetail=false;
+//    private Boolean viewdetail=false;
+    private HashMap<Integer, Boolean> viewJobObject;
+    private Integer jobILike = -1;
 
     @Autowired
     JobRepository jobRepository;
@@ -35,8 +38,9 @@ public class HomeController {
     @GetMapping("/")
     public String showhome(Model m){
         m.addAttribute("jobList", listOfGitHubJobs);
-        m.addAttribute("viewdetail", viewdetail);
-    return "home";
+        m.addAttribute("jobILike", jobILike);
+        m.addAttribute("viewJobObject", viewJobObject);
+        return "home";
 }
 
 @PostMapping("/jobsearch")
@@ -45,28 +49,36 @@ public class HomeController {
         // api call here
         //AdzunaJobs.getAdzunaJobs(title,location);
         listOfGitHubJobs = GitHubJobs.getGitHubJobs(title,location);
+        viewJobObject = new HashMap<>();
         ApplicationUser testUser = new ApplicationUser();
         JobStatus test = new JobStatus();
         Job testJob = new Job(testUser, "test","test","test","test","test","test","test",test);
         listOfGitHubJobs.add(testJob);
+        for (Integer i=0; i< listOfGitHubJobs.size(); i++){
+            viewJobObject.put(i, false);
+        }
+        System.out.println("here is the object you are looking for here in /jobsearch  " + viewJobObject.toString());
+
         // iterate through the json object and then run it through the constructor
         return new RedirectView("/");
 }
 
     @PostMapping("/jobdetail")
-    public RedirectView viewJob(Model m, String choice){
+    public RedirectView viewJob(String choice, Integer jobIndex){
+        jobILike = jobIndex;
+        System.out.println("jobIlike "+jobILike);
         if(choice.equals("view")){
-            viewdetail = true;
+            viewJobObject.replace(jobILike,true);
         } else {
-            viewdetail = false;
+            viewJobObject.replace(jobILike,false);
         }
-        m.addAttribute("jobList", listOfGitHubJobs);
-        m.addAttribute("viewdetail", viewdetail);
+        if (viewJobObject.size()>0){
+            System.out.println("here is the object you are looking for here in /jobdetail  " + viewJobObject.toString());
+        }
         return new RedirectView("/");
     }
 
     @PostMapping("/saveJobFromApi")
-
     public RedirectView saveJobFromApi(int jobIndex, Model m, Principal principal){
         System.out.println("this is job info after saving" + jobIndex);
         System.out.println("list of gitHub jobs " + listOfGitHubJobs.get(jobIndex).getClass());
@@ -81,19 +93,6 @@ public class HomeController {
         jobRepository.save(listOfGitHubJobs.get(jobIndex));
         return new RedirectView("/allmyjobs");
     }
-
-//    public void setCreatedAt(Date createdAt) {
-//        this.createdAt = createdAt;
-//    }
-//    public void setType(String type) {
-//        this.type = type;
-//    }
-//    public void setJobStatus(JobStatus jobStatus) {
-//        this.jobStatus = jobStatus;
-//    }
-//    public void setApplicationUser(ApplicationUser applicationUser) {
-//        this.applicationUser = applicationUser;
-//    }
 
 }
 

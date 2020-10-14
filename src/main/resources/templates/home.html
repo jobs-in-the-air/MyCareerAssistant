@@ -17,23 +17,26 @@
         Location: <input type="text" name="location">
         <input type="submit" value="Submit">
     </form>
-<!--    <form action="/jobdetail" method="POST">-->
-<section th:if="${jobList}">
+
+    <section th:if="${jobList}">
         <section th:each="jobInfo : ${jobList}">
             <form action="/jobdetail" method="POST">
          <p th:text="${jobInfo.getTitle()}"></p>
          <p th:text="${jobInfo.getLocation()}"></p>
             <a th:href="${jobInfo.getUrl()}">Apply Here</a>
-            <p th:if="${viewdetail}" th:text="${jobInfo.getDescription()}">
-            </p>
-                <div th:switch="${viewdetail}">
-                    <span th:case="true">
+                <p th:text="'this is if it is empty ' + ${viewJobObject.isEmpty()}"></p>
+<!--                <p th:text="'this is the value of the job '+${viewJobObject.get(${jobList.indexOf(jobInfo)}}"></p>-->
+                <input type="hidden" th:value="${jobList.indexOf(jobInfo)}" name="jobIndex">
+<!--            <p th:if="${viewJobObject.get(jobList.indexOf(jobInfo)=='false'}" th:text="${jobInfo.getDescription()}">-->
+<!--            </p>-->
+<!--                <div th:switch="${viewJobObject.get(jobList.indexOf(jobInfo)}">-->
+<!--                    <span th:case="true">-->
                 <input type="submit" value="hide" name="choice">
-                    </span>
-                    <span th:case="false">
+<!--                    </span>-->
+<!--                    <span th:case="false">-->
                 <input type="submit" value="view" name="choice">
-                    </span>
-                </div>
+<!--                    </span>-->
+<!--                </div>-->
             </form>
             <form action="/saveJobFromApi" method="POST">
                 <input type="hidden" th:value="${jobList.indexOf(jobInfo)}" name="jobIndex">
