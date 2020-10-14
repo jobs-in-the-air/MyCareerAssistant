@@ -146,4 +146,7 @@ public class Job {
         return postList;
     }
 
+    public void addContact(Contact contact) {
+        relatedContacts.add(contact);
+    }
 }

@@ -44,7 +44,24 @@
             <li th:text="${currentJob.getType()}"></li>
         </ul>
     </section>
+    <section>
+        <div th:each="contact : ${contacts}">
+            <p th:text="${contact.getName()} + ' at ' + ${contact.getLinkedin()}"></p>
+           <form action="/remove/contact" method="post">
+                <input type="hidden" name="contactId" th:value="${contact.getId()}">
+                <input type="submit" value="Remove Contact">
+            </form>
+            </div>
+        <form action="/updatejobcontacts" method="post">
+            <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
+            <input type="submit" value="Add Contacts">
+            <select name="contactId">
+                <option th:each="contact : ${user.getContactList()}" th:value="${contact.getId()}">
 
+                </option>
+            </select>
+        </form>
+    </section>
     <section th:if="${currentJob}">
         <form action="/post" method="post">
             <legend>Add Post

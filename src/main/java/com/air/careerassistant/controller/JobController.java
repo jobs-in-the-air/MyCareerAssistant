@@ -63,6 +63,7 @@ public class JobController {
         if (job.getApplicationUser().getUsername().equals(principal.getName())) {
             model.addAttribute("currentJob", job);
             model.addAttribute("posts", job.getPostList());
+            model.addAttribute("user", job.getApplicationUser());
         }
 
         return "details";
