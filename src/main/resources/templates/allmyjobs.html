@@ -21,6 +21,7 @@
     <h1> These are All My Jobs </h1>
 
     <section th:each="jobs: ${user.getJobList()}">
+        <a th:href="'/jobdetails/'+ ${user.getJobList().indexOf(jobs)+1}">
         <div th:class="${jobs.getJobStatus().getClassString()}">
         <p th:text="${jobs.getCreatedAt()}"></p>
         <p th:text="${jobs.title}"></p>
@@ -28,6 +29,7 @@
         <p th:if="${jobs.getJobStatus()}"></p>
         <p th:text="${jobs.getJobStatus().getStatus()}"></p>
         </div>
+        </a>
     </section>
 
 </main>
