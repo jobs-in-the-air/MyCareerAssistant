@@ -10,14 +10,26 @@
       crossorigin="anonymous">
 <title>Login</title>
 </head>
-<body>
-<h1>You need to log in</h1>
-<form action="/login" method="POST">
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <input type="submit">
-</form>
-
-<a href="/signup">New User Sign In</a>
+<body class="p-3 mb-2 bg-info text-white">
+<header>
+    <nav th:replace="fragments/nav :: nav">
+    </nav>
+</header>
+<br>
+<br>
+<br>
+<br>
+<main>
+    <div class="container p-3 mb-2 bg-light text-dark">
+    <form action="/login" method="POST">
+       <legend class="row mb-1 py-3 pl-3"> <h1 >Login</h1> </legend>
+        <div class="row justify-content-md-center mb-2">
+            <div class="col-4 py-3 pl-3">Username: <input type="text" name="username"> </div>
+            <div class="col-4 py-3 pl-3">Password: <input type="password" name="password"></div>
+            <div class="col-4 py-3 pl-3"><input class="col-4" type="submit" value="Submit"></div>
+        </div>
+    </form>
+    </div>
+</main>
 </body>
 </html>
