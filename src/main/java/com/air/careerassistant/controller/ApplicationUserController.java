@@ -14,15 +14,19 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 @Controller
 public class ApplicationUserController {
 
 @Autowired
     private PasswordEncoder passwordEncoder;
+
 @Autowired
     ApplicationUserRepository applicationUserRepository;
+
 @GetMapping("/login")
     public String login (){
     return "login";
@@ -52,7 +56,16 @@ public class ApplicationUserController {
         }
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
         m.addAttribute("user", user);
+        Date currentDate = new Date(Calendar.getInstance().getTime().getTime());
+        m.addAttribute("currentDate", currentDate);
+        String blackClass= "card-text p-3 mb-2 bg-dark text-white";
+        m.addAttribute("blackClass",blackClass);
+        // function here to compare createdAt and check if more than 30 days have passed
         return ("allmyjobs");
     }
+
+//    private boolean isJobInactive(ApplicationUser user){
+//    // get date of the l
+//    }
 
 }
