@@ -11,23 +11,42 @@
           crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <header>
     <nav th:replace="fragments/nav :: nav">
     </nav>
 </header>
 <main>
+    <br>
+    <br>
+    <br>
+    <br>
     <form action="/jobsearchresult" method="POST">
-        <legend>Add a Job</legend>
-        Job Url: <input type="text" name="url">
-        Company: <input type="text" name="company">
-        Company Url: <input type="text" name="company_url">
-        Job Title: <input type="text" name="title">
-        Location: <input type="text" name="location">
-        Description: <input type="text" name="description">
-        Contract Type: <input type="text" name="type">
-        JobStatus: <input type="text" name="status" value="viewed">
-        <input type="submit" value="Submit">
+        <div class="container">
+        <legend class="row justify-content-md-center">
+            <h1 class="col-6 col-md-4">Add a Job</h1>
+        </legend>
+            <div class="row justify-content-md-center">
+                <div class="col-4 py-3 pl-3">
+                    Job Url: <input type="text" name="url"></div>
+                <div class="col-4 py-3 pl-3">
+                    Company: <input type="text" name="company"></div>
+                <div class="col-4 py-3 pl-3">
+                    Company Url: <input type="text" name="company_url"></div>
+                <div class="col-4 py-3 pl-3">
+                    Job Title: <input type="text" name="title"></div>
+                <div class="col-4 py-3 pl-3">
+                    Location: <input type="text" name="location"></div>
+                <div class="col-4 py-3 pl-3">
+                    Description: <input type="text" name="description"></div>
+                <div class="col-4 py-3 pl-3">
+                    Contract Type: <input type="text" name="type"></div>
+                <div class="col-4 py-3 pl-3">
+                    <input class="col-6 col-md-4" type="submit" value="Submit"></div>
+                <div class="col-4">
+                    <input type="hidden" name="status" value="viewed"></div>
+            </div>
+        </div>
     </form>
 </main>
 </body>
