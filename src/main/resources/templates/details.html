@@ -9,6 +9,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 
     <title>Document</title>
 </head>
@@ -17,7 +18,10 @@
     <nav th:replace="fragments/nav :: nav">
     </nav>
 </header>
-<main class="container">
+<br>
+<br>
+<br>
+<main class="container mt-5">
 
     <section class="row" th:if="${currentJob}">
         <h2 th:class="${currentJob.getJobStatus().getClassString()} + ' col-md-6'" th:text="'Job Status: ' + ${currentJob.getJobStatus().getStatus()}"></h2>
@@ -37,13 +41,13 @@
         </form>
     </section>
 
-    <section class="row bg-light" th:if="${currentJob}">
-        <h3 class="col-md-12 text-info">Job Details</h3>
-        <ul class="row">
+    <section class="row border border-info border-3 bg-info text-white" th:if="${currentJob}">
+        <h3 class="col-md-12">Job Details</h3>
+        <ul class="row no-bullets">
             <li class="col-md-4" th:text="'Job Title : ' + ${currentJob.getTitle()}"></li>
             <li  class="col-md-4" th:text="'Company : ' + ${currentJob.getCompanyName()}"></li>
             <li  class="col-md-4" th:text="'Company Website : ' + ${currentJob.getCompanyUrl()}"></li>
-            <li  class="col-md-4" ><a target="_blank" th:href="${currentJob.getUrl()}">Job Posting</a></li>
+            <li  class="col-md-4" ><a class="btn btn-secondary" target="_blank" th:href="${currentJob.getUrl()}">Job Posting</a></li>
             <li  class="col-md-4" th:text="'Location : ' + ${currentJob.getLocation()}"></li>
             <li  class="col-md-4" th:text="'Description : ' + ${currentJob.getDescription()}"></li>
          </ul>
@@ -72,30 +76,30 @@
 
 
     </section>
-    <section class="row bg-info mt-2 text-white" th:if="${currentJob}">
+    <section class="row bg-info mt-2 text-white pb-1" th:if="${currentJob}">
         <form class="col-md-12" action="/post" method="post">
-            <legend>Add Post
+            <legend>Comments
             </legend>
             <input type="text" name="body">
             <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
             <input class="btn btn-secondary btn-sm" type="submit" value="Submit">
         </form>
       <div class="col-md-12" th:each="post : ${posts}">
-          <p th:text="${post.getPostUser().getUsername()} + ' on ' + ${post.getCreatedAt()}"></p>
-          <p th:text="${post.getBody()}"></p>
-          <form action="/delete/post" method="post">
+          <p class="mt-2 mb-1" th:text="${post.getCreatedAt()} + ' : ' + ${post.getBody()}"></p>
+          <form class="d-inline float-left mr-3" action="/delete/post" method="post">
               <input type="hidden" name="postId" th:value="${post.getId()}">
-              <input class="btn btn-secondary btn-sm" type="submit" value="Delete Post">
+              <input class="btn btn-secondary btn-sm" type="submit" value="Delete Comment">
           </form>
+
           <form action="/update/post" method="post">
               <input type="hidden" name="postId" th:value="${post.getId()}">
               <input type="text" name="body" th:value="${post.getBody()}">
-              <input class="btn btn-secondary btn-sm" type="submit" value="Update Post">
+              <input class="btn btn-secondary btn-sm" type="submit" value="Update Comment">
           </form>
       </div>
     </section>
 
-    <section class="row bg-danger mt-5 text-white p-5">
+    <section class="row bg-danger mt-2 text-white p-3">
         <p class="col-md-6">WARNING - Deleting a job listing is permanent!</p>
         <form class="col-md-6" action="/delete/job" method="post">
             <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
