@@ -37,6 +37,18 @@
     </form>
     <br>
     <br>
+    <br>
+    <form action="/newsearch" method="POST">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-4">
+        <input class="col bg-secondary text-white" type="submit" value="newsearch" name="newsearch">
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+    <br>
     <section th:if="${jobList}" class="container mx-auto" style="width: 600px;" >
         <section th:each="jobInfo : ${jobList}" class="p-3 mb-2 bg-light text-dark" >
             <form action="/jobdetail" method="POST">

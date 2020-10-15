@@ -9,6 +9,7 @@ import com.air.careerassistant.model.user.ApplicationUser;
 import com.air.careerassistant.model.user.ApplicationUserRepository;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,18 +45,19 @@ public class HomeController {
         m.addAttribute("viewJobObject", viewJobObject);
         return "home";
 }
+    @PostMapping("/newsearch")
+    public RedirectView newSearch(String newsearch){
+        listOfGitHubJobs= new ArrayList<>();
+        viewJobObject = new HashMap<>();
+        return new RedirectView("/");
+    }
 
     @PostMapping("/jobsearch")
-    public RedirectView showSearches(String title, String location, Model m) throws IOException {
-        System.out.println("Inside /job searches here with title "+title+" "+location);
+    public RedirectView showSearches(String title, String location) throws IOException {
         // api call here
         //AdzunaJobs.getAdzunaJobs(title,location);
         listOfGitHubJobs = GitHubJobs.getGitHubJobs(title,location);
         viewJobObject = new HashMap<>();
-        ApplicationUser testUser = new ApplicationUser();
-        JobStatus test = new JobStatus();
-        Job testJob = new Job(testUser, "test","test","test","test","test","test","test",test);
-        listOfGitHubJobs.add(testJob);
         for (Integer i=0; i< listOfGitHubJobs.size(); i++){
             viewJobObject.put(i, false);
         }
