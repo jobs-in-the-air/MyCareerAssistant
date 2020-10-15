@@ -38,6 +38,9 @@ public class ContactController {
  }
  @PostMapping("/updatejobcontacts")
     public RedirectView updjobatecontacts(Principal principal, Long jobId, Long contactId) {
+     if(contactId == -1) {
+         return new RedirectView("/jobdetails/" + jobId);
+     }
      Contact contact = contactRepository.getOne(contactId);
      Job job = jobRepository.getOne(jobId);
      contact.addJob(job);
