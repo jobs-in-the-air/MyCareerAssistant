@@ -5,6 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
     <title>Document</title>
 </head>
 <body>
@@ -12,11 +17,11 @@
     <nav th:replace="fragments/nav :: nav">
     </nav>
 </header>
-<main>
+<main class="container">
 
-    <section th:if="${currentJob}">
-        <p th:text="'Job Status: ' + ${currentJob.getJobStatus().getStatus()}"></p>
-        <form action="/status" method="post">
+    <section class="row" th:if="${currentJob}">
+        <h2 th:class="${currentJob.getJobStatus().getClassString()} + ' col-md-6'" th:text="'Job Status: ' + ${currentJob.getJobStatus().getStatus()}"></h2>
+        <form class="col-md-6 p-3 mb-2 bg-secondary text-white" action="/status" method="post">
             <legend>Update Job Status</legend>
             <select name="status">
                 <option value="viewed">viewed</option>
@@ -32,66 +37,70 @@
         </form>
     </section>
 
-    <section th:if="${currentJob}">
-        <p>job details</p>
-        <ul>
-            <li th:text="${currentJob.getTitle()}"></li>
-            <li th:text="${currentJob.getCompanyName()}"></li>
-            <li th:text="${currentJob.getCompanyUrl()}"></li>
-            <li th:text="${currentJob.getUrl()}"></li>
-            <li th:text="${currentJob.getLocation()}"></li>
-            <li th:text="${currentJob.getDescription()}"></li>
-            <li th:text="${currentJob.getType()}"></li>
-        </ul>
+    <section class="row bg-light" th:if="${currentJob}">
+        <h3 class="col-md-12 text-info">Job Details</h3>
+        <ul class="row">
+            <li class="col-md-4" th:text="'Job Title : ' + ${currentJob.getTitle()}"></li>
+            <li  class="col-md-4" th:text="'Company : ' + ${currentJob.getCompanyName()}"></li>
+            <li  class="col-md-4" th:text="'Company Website : ' + ${currentJob.getCompanyUrl()}"></li>
+            <li  class="col-md-4" ><a target="_blank" th:href="${currentJob.getUrl()}">Job Posting</a></li>
+            <li  class="col-md-4" th:text="'Location : ' + ${currentJob.getLocation()}"></li>
+            <li  class="col-md-4" th:text="'Description : ' + ${currentJob.getDescription()}"></li>
+         </ul>
     </section>
-    <section>
-        <div th:each="contact : ${currentJob.getRelatedContacts()}">
-            <p th:text="${contact.getName()} + ' at ' + ${contact.getLinkedinUrl()}"></p>
-           <form action="/remove/contact" method="post">
-                <input type="hidden" name="contactId" th:value="${contact.getId()}">
-               <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
-                <input type="submit" value="Remove Contact">
-            </form>
-            </div>
-        <form action="/updatejobcontacts" method="post">
+    <section class="row bg-info mt-2">
+        <form class="col-md-12 mt-2 mb-2" action="/updatejobcontacts" method="post">
             <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
-            <input type="submit" value="Add Contacts">
-            <select name="contactId">
-                <option th:each="contact : ${user.getContactList()}" th:value="${contact.getId()}" th:text="${contact.getName()}">
+            <input class="btn btn-secondary" type="submit" value="Add Contacts">
+            <select class="dropdown-toggle btn-secondary" name="contactId">
+                <option class="dropdown-header" value="-1">Contact List
+
+                </option>
+                <option class="dropdown-item" th:each="contact : ${user.getContactList()}" th:if="${!currentJob.getRelatedContacts().contains(contact)}" th:value="${contact.getId()}" th:text="${contact.getName()}">
 
                 </option>
             </select>
         </form>
+           <div class="col-md-3" th:each="contact : ${currentJob.getRelatedContacts()}">
+                <form class="d-inline float-left mr-3" action="/remove/contact" method="post">
+                    <input type="hidden" name="contactId" th:value="${contact.getId()}">
+                    <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
+                    <input class="btn btn-sm btn-secondary" type="submit" value="X">
+                </form>
+               <p class="text-white" th:text="${contact.getName()} + ' at ' + ${contact.getLinkedinUrl()}"></p>
+            </div>
+
+
     </section>
-    <section th:if="${currentJob}">
-        <form action="/post" method="post">
+    <section class="row bg-info mt-2 text-white" th:if="${currentJob}">
+        <form class="col-md-12" action="/post" method="post">
             <legend>Add Post
             </legend>
             <input type="text" name="body">
             <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
-            <input type="submit" value="Submit">
+            <input class="btn btn-secondary btn-sm" type="submit" value="Submit">
         </form>
-      <div th:each="post : ${posts}">
+      <div class="col-md-12" th:each="post : ${posts}">
           <p th:text="${post.getPostUser().getUsername()} + ' on ' + ${post.getCreatedAt()}"></p>
           <p th:text="${post.getBody()}"></p>
           <form action="/delete/post" method="post">
               <input type="hidden" name="postId" th:value="${post.getId()}">
-              <input type="submit" value="Delete Post">
+              <input class="btn btn-secondary btn-sm" type="submit" value="Delete Post">
           </form>
           <form action="/update/post" method="post">
               <input type="hidden" name="postId" th:value="${post.getId()}">
               <input type="text" name="body" th:value="${post.getBody()}">
-              <input type="submit" value="Update Post">
+              <input class="btn btn-secondary btn-sm" type="submit" value="Update Post">
           </form>
       </div>
     </section>
 
-    <section>
-        <p>WARNING - Deleting a job listing is permanent!</p>
-        <form action="/delete/job" method="post">
+    <section class="row bg-danger mt-5 text-white p-5">
+        <p class="col-md-6">WARNING - Deleting a job listing is permanent!</p>
+        <form class="col-md-6" action="/delete/job" method="post">
             <input type="hidden" name="jobId" th:value="${currentJob.getId()}">
             Input username: <input type="text" name="name">
-            <input type="submit" value="Delete Job">
+            <input class="btn btn-secondary btn-sm" type="submit" value="Delete Job">
         </form>
     </section>
 
