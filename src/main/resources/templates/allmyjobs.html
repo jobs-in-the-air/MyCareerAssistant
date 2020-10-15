@@ -13,9 +13,21 @@
 
     <title>Document</title>
 </head>
-<body>
+<body class="p-3 mb-2 bg-light text-white">
 <header>
-    <nav th:replace="fragments/nav :: nav">
+    <nav xmlns:th="http://www.w3.org/1999/xhtml" class="navbar fixed-top navbar-light bg-info text-white" style="background-color: #e3f2fd;">
+        <br>
+        <br>
+        <br>
+        <div class="nav-brand"><a href="/" class="text-white">Search Jobs</a></div>
+        <div  class = "nav-brand text-decoration-none" th:if="${principal}"><a href="/addjob" class="text-white">Add Job</a></div>
+        <div class = "nav-brand text-decoration-none"  th:if="${principal}"><a href="/allmyjobs" class="text-white">Saved Jobs</a></div>
+        <div class = "nav-brand text-decoration-none"  th:if="${principal}"><a href="/logout" class="text-white">Logout</a></div>
+        <div  class = "nav-brand text-decoration-none" th:unless="${principal}"><a href="/login" class="text-white">Login</a></div>
+        <div class = "nav-brand text-decoration-none" th:unless="${principal}"><a href="/signup" class="text-white">Signup</a></div>
+        <br>
+        <br>
+        <br>
     </nav>
 </header>
 <br>
@@ -27,7 +39,7 @@
         <div class="row">
     <section th:each="jobs: ${user.getJobList()}" class="col-sm">
         <div class="card my-3" style="width: 18rem;">
-        <a th:href="'/jobdetails/'+ ${user.getJobList().indexOf(jobs)+1}" class="text-decoration-none">
+        <a th:href="'/jobdetails/'+ ${jobs.getId()}" class="text-decoration-none">
         <div th:class="${jobs.getJobStatus().getClassString()}">
             <div class="card-body">
         <h5 class="card-title" th:text="${jobs.title}"></h5>
