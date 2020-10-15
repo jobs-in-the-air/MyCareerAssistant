@@ -27,6 +27,8 @@ public class Job {
     Date createdAt;
     String type =null;
 
+    Date lastUpdated = new Date(Calendar.getInstance().getTime().getTime());
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="status_id", referencedColumnName = "id")
     public JobStatus jobStatus;
@@ -61,6 +63,13 @@ public class Job {
 
     }
 
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
 
     public JobStatus getJobStatus() {
         return jobStatus;

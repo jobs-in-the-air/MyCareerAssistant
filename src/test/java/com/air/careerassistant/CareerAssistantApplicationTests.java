@@ -37,11 +37,10 @@ class CareerAssistantApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<form action=\"/jobsearch\" method=\"POST\">")));
     }
-
-
+    
     @Test
-    public void detailPageShouldHaveSnowdropName() throws Exception {
-        this.mockMvc.perform(get("/user/1"))
+    public void testLoginBeforeAccess() throws Exception {
+        this.mockMvc.perform(get("/allmyjobs"))
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
 
