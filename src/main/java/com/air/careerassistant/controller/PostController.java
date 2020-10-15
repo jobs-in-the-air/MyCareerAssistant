@@ -17,10 +17,13 @@ import java.security.Principal;
 public class PostController {
     @Autowired
     ApplicationUserRepository applicationUserRepository;
+
     @Autowired
     JobRepository jobRepository;
+
     @Autowired
     PostRepository postRepository;
+
     @PostMapping("/post")
     public RedirectView addPost(String body, Long jobId, Principal principal){
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());

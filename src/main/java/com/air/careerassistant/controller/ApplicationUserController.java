@@ -31,14 +31,16 @@ public class ApplicationUserController {
     public String login (){
     return "login";
 }
+
     @GetMapping("/signup")
     public String signup (){
         return "signup";
     }
+
     @PostMapping("/signup")
     public RedirectView signup(String username, String firstname, String lastname, String password, HttpServletRequest request){
-    password=passwordEncoder.encode(password);
-        ApplicationUser newUser=new ApplicationUser(username, firstname, lastname, password);
+    String hashedPassword = passwordEncoder.encode(password);
+        ApplicationUser newUser=new ApplicationUser(username, firstname, lastname, hashedPassword);
         applicationUserRepository.save(newUser);
         try {
             request.login(username,password);
@@ -60,12 +62,10 @@ public class ApplicationUserController {
         m.addAttribute("currentDate", currentDate);
         String blackClass= "card-text p-3 mb-2 bg-dark text-white";
         m.addAttribute("blackClass",blackClass);
+
         // function here to compare createdAt and check if more than 30 days have passed
         return ("allmyjobs");
     }
 
-//    private boolean isJobInactive(ApplicationUser user){
-//    // get date of the l
-//    }
 
 }

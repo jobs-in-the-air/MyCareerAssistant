@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
 
 @Controller
 public class JobController {
@@ -69,6 +73,10 @@ public class JobController {
             model.addAttribute("posts", job.getPostList());
             model.addAttribute("user", job.getApplicationUser());
         }
+//        System.out.println("This is the last updated" +job.getLastUpdated());
+//        Instant tempDate = job.getLastUpdated().toInstant();
+//        Instant today = Calendar.getInstance().getTime().toInstant();
+//        System.out.println("This is Jack's crazy line " + ChronoUnit.DAYS.between(tempDate, today));
         return "details";
     }
 
