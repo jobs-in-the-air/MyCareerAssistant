@@ -35,14 +35,17 @@ public class HomeController {
     ApplicationUserRepository applicationUserRepository;
 
     @GetMapping("/")
-    public String showhome(Model m){
+    public String showhome(Model m, Principal principal){
+        if (principal != null){
+            m.addAttribute("principal",principal);
+        }
         m.addAttribute("jobList", listOfGitHubJobs);
         m.addAttribute("jobILike", jobILike);
         m.addAttribute("viewJobObject", viewJobObject);
         return "home";
 }
 
-@PostMapping("/jobsearch")
+    @PostMapping("/jobsearch")
     public RedirectView showSearches(String title, String location, Model m) throws IOException {
         System.out.println("Inside /job searches here with title "+title+" "+location);
         // api call here

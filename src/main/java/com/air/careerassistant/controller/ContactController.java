@@ -8,6 +8,7 @@ import com.air.careerassistant.model.user.ApplicationUser;
 import com.air.careerassistant.model.user.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
@@ -25,7 +26,10 @@ public class ContactController {
     JobRepository jobRepository;
 
  @GetMapping("/addcontacts")
- public String showcontacts() {
+ public String showcontacts(Principal principal, Model m) {
+     if (principal != null){
+         m.addAttribute("principal",principal);
+     }
      return "addcontacts";
  }
  @PostMapping("/addcontacts")

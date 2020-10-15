@@ -32,7 +32,10 @@ public class JobController {
 
 
     @GetMapping("/addjob")
-    public String showDetails() {
+    public String showDetails(Principal principal, Model m) {
+        if (principal != null){
+            m.addAttribute("principal",principal);
+        }
         return "addjob";
     }
 
@@ -59,13 +62,13 @@ public class JobController {
 
     @GetMapping("/jobdetails/{localId}")
     public String showNewJobDetails(Model model, Principal principal, @PathVariable Long localId) {
+        model.addAttribute("principal",principal);
         Job job = jobRepository.getOne(localId);
         if (job.getApplicationUser().getUsername().equals(principal.getName())) {
             model.addAttribute("currentJob", job);
             model.addAttribute("posts", job.getPostList());
             model.addAttribute("user", job.getApplicationUser());
         }
-
         return "details";
     }
 

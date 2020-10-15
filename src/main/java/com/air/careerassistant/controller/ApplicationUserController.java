@@ -47,6 +47,9 @@ public class ApplicationUserController {
 
     @GetMapping("/allmyjobs")
     public String returnAllJobs(Model m, Principal principal){
+        if (principal != null){
+            m.addAttribute("principal",principal);
+        }
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
         m.addAttribute("user", user);
         return ("allmyjobs");

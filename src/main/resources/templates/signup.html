@@ -1,18 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
-<body>
-<form action="/signup" method="POST">
-    Enter Username:<input type="text" name="username">
-    Enter Password:<input type="password" name="password">
-    Enter First Name:<input type="text" name="firstname">
-    Enter Last Name:<input type="text" name="lastname">
-    <input type="submit">
-</form>
-
-
+<body class="p-3 mb-2 bg-info text-white">
+<header>
+    <nav th:replace="fragments/nav :: nav">
+    </nav>
+</header>
+<br>
+<br>
+<br>
+<br>
+<main>
+    <div class="container p-3 mb-2 bg-light text-dark">
+        <form action="/signup" method="POST">
+        <legend class="row mb-1 py-3 pl-3"> <h1 >Signup</h1> </legend>
+        <div class="row justify-content-md-center mb-2">
+            <div class="col-4 py-3 pl-3">Username: <input type="text" name="username"></div>
+            <div class="col-4 py-3 pl-2">Password: <input type="password" name="password"></div>
+            <div class="col-4 py-3 pl-2">First Name: <input type="text" name="firstname"></div>
+            <div class="col-4 py-3 pl-2">Last Name: <input type="text" name="lastname"></div>
+            <div class="col-4 py-3 pl-2 pr-3"><input class="col-4" type="submit" value="Submit"></div>
+        </div>
+        </form>
+    </div>
+</main>
 </body>
 </html>
