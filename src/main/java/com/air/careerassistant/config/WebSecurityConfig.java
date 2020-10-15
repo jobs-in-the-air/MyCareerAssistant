@@ -31,7 +31,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
                     .cors().disable() //whitelist pages
                     .csrf().disable() //cross site resource forgery
                     .authorizeRequests()//all sites until AND are connected
-                    .antMatchers("/", "/jobsearch", "/jobdetail").permitAll()
+                    .antMatchers("/", "/jobsearch", "/jobdetail", "/newsearch").permitAll()
                     .antMatchers( "/signup", "/login").permitAll()
                     .anyRequest().authenticated() //forces login
                     .and()
