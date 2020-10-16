@@ -48,7 +48,7 @@
                 <h5 class="card-title" th:text="${jobs.title}"></h5>
                 <p class="card-text" th:text="${jobs.getCompanyName()}"></p>
                 <p class="card-text" th:text="${jobs.getLocation()}"></p>
-                <p class="card-text" th:text="${jobs.getCreatedAt()}"></p>
+                <p class="card-text" th:text="'Status: '+${jobs.getJobStatus().getStatus()}"></p>
             </div>
             </div>
         </a>

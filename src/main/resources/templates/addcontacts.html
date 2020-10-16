@@ -8,7 +8,7 @@
           crossorigin="anonymous">
     <title>Title</title>
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-white">
 <header>
     <nav th:replace="fragments/nav :: nav">
     </nav>
@@ -19,10 +19,17 @@
 <br>
 <main>
     <form action="/addcontacts" method="POST">
-        <legend>Add Contacts</legend>
-        Name: <input type="text" name="name">
-        Linkedin: <input type="text" name="linkedin">
-        <input type="submit" value="Submit">
+        <div class="container">
+            <legend class="row justify-content-md-center"><h1 class="col-6 col-md-4">Add Contacts</h1></legend>
+            <div class="row justify-content-md-center">
+                <div class="col-4 py-3 pl-3">
+                    Name: <input type="text" name="name"></div>
+                <div class="col-4 py-3 pl-3">
+                    Linkedin URL: <input type="text" name="linkedin"></div>
+                <div class="col-4 py-3 pl-3">
+                    <input type="submit" value="Submit"></div>
+            </div>
+        </div>
     </form>
 </main>
 </body>
