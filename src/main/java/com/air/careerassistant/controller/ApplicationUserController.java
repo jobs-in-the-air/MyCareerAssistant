@@ -37,6 +37,9 @@ public class ApplicationUserController {
         return "signup";
     }
 
+    @GetMapping("/aboutme")
+    public String aboutme () { return "aboutme"; }
+
     @PostMapping("/signup")
     public RedirectView signup(String username, String firstname, String lastname, String password, HttpServletRequest request){
     String hashedPassword = passwordEncoder.encode(password);
