@@ -56,7 +56,7 @@
          <p th:text="${jobInfo.getLocation()}"></p>
             <a th:href="${jobInfo.getUrl()}">Apply Here</a>
                 <input type="hidden" th:value="${jobList.indexOf(jobInfo)}" name="jobIndex">
-                <p th:if="${viewJobObject.get(jobList.indexOf(jobInfo))}" th:text="${jobInfo.getDescription()}">
+                <p th:if="${viewJobObject.get(jobList.indexOf(jobInfo))}" th:utext="${jobInfo.getDescription()}">
                 </p>
                 <span  class="justify-content-md-left">
                 <div th:switch="${viewJobObject.get(jobList.indexOf(jobInfo))}">
