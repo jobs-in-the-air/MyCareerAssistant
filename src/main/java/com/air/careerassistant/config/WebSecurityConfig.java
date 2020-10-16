@@ -34,7 +34,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
                     .authorizeRequests()//all sites until AND are connected
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .antMatchers("/", "/jobsearch", "/jobdetail", "/newsearch").permitAll()
-                    .antMatchers( "/signup", "/login", "/aboutme").permitAll()
+                    .antMatchers( "/signup", "/login", "/aboutme", "/hello", "/topic/greetings").permitAll()
                     .anyRequest().authenticated() //forces login
                     .and()
                     .formLogin()//settings about Login
