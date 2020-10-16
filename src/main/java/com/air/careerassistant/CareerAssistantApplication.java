@@ -8,6 +8,7 @@ public class CareerAssistantApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CareerAssistantApplication.class, args);
+
 	}
 
 }
