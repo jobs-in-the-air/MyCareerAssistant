@@ -1,6 +1,7 @@
 package com.air.careerassistant.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,6 +32,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
                     .cors().disable() //whitelist pages
                     .csrf().disable() //cross site resource forgery
                     .authorizeRequests()//all sites until AND are connected
+                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .antMatchers("/", "/jobsearch", "/jobdetail", "/newsearch").permitAll()
                     .antMatchers( "/signup", "/login", "/aboutme").permitAll()
                     .anyRequest().authenticated() //forces login

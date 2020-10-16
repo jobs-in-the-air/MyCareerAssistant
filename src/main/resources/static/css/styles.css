@@ -14,3 +14,9 @@ a.link-white:visited, a.link-white:link {
     color: white;
     text-decoration: underline;
 }
+
+.profileImg {
+    height: 200px;
+    float: left;
+    margin-right: 10px;
+}

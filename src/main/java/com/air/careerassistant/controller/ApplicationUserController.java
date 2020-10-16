@@ -38,7 +38,10 @@ public class ApplicationUserController {
     }
 
     @GetMapping("/aboutme")
-    public String aboutme () { return "aboutme"; }
+    public String aboutme (Model m, Principal principal) {
+        m.addAttribute("principal", principal);
+        return "aboutme";
+    }
 
     @PostMapping("/signup")
     public RedirectView signup(String username, String firstname, String lastname, String password, HttpServletRequest request){
