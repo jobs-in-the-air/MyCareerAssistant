@@ -32,7 +32,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
                     .csrf().disable() //cross site resource forgery
                     .authorizeRequests()//all sites until AND are connected
                     .antMatchers("/", "/jobsearch", "/jobdetail", "/newsearch").permitAll()
-                    .antMatchers( "/signup", "/login").permitAll()
+                    .antMatchers( "/signup", "/login", "/aboutme").permitAll()
                     .anyRequest().authenticated() //forces login
                     .and()
                     .formLogin()//settings about Login
