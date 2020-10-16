@@ -22,9 +22,12 @@
         <div class="nav-brand"><a href="/" class="text-white">Search Jobs</a></div>
         <div  class = "nav-brand text-decoration-none" th:if="${principal}"><a href="/addjob" class="text-white">Add Job</a></div>
         <div class = "nav-brand text-decoration-none"  th:if="${principal}"><a href="/allmyjobs" class="text-white">Saved Jobs</a></div>
+        <div class = "nav-brand text-decoration-none"  th:if="${principal}"><a href="/addcontacts" class="text-white">Update Contacts</a></div>
+        <div class = "nav-brand text-decoration-none"  th:if="${principal}"><a href="/sharejobs" class="text-white">Job Chat</a></div>
         <div class = "nav-brand text-decoration-none"  th:if="${principal}"><a href="/logout" class="text-white">Logout</a></div>
         <div  class = "nav-brand text-decoration-none" th:unless="${principal}"><a href="/login" class="text-white">Login</a></div>
         <div class = "nav-brand text-decoration-none" th:unless="${principal}"><a href="/signup" class="text-white">Signup</a></div>
+        <div class = "nav-brand text-decoration-none"><a href="/aboutme" class="text-white">About Us</a></div>
         <br>
         <br>
         <br>
